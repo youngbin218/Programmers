@@ -1,0 +1,58 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+vector<int> solution(vector<int> lottos, vector<int> win_nums) {
+    vector<int> answer;
+    int win = 0;
+    int zero = 0;
+    for (int i=0;i<6;i++) {
+        if (lottos[i] != 0) {
+            for (int j=0;j<6;j++) {
+                if (lottos[i] == win_nums[j]) {
+                    win++;
+                    break;
+                }
+            }
+        }
+        else
+            zero++;
+    }
+    
+    switch(win) {
+        case 6:
+            answer.push_back(1);
+            answer.push_back(1);
+            break;
+        case 5:
+            answer.push_back(2-zero);
+            answer.push_back(2);
+            break;
+        case 4:
+            answer.push_back(3-zero);
+            answer.push_back(3);
+            break;
+        case 3:
+            answer.push_back(4-zero);
+            answer.push_back(4);
+            break;
+        case 2:
+            answer.push_back(5-zero);
+            answer.push_back(5);
+            break;
+        case 1:
+            answer.push_back(6-zero);
+            answer.push_back(6);
+            break;
+        default:
+            if (zero == 0 || zero == 1)
+                answer.push_back(6);
+            else
+                answer.push_back(7-zero);
+            answer.push_back(6);
+            break;
+    }
+    
+    return answer;
+}
